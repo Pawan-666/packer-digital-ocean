@@ -28,7 +28,12 @@ build {
   sources = ["source.digitalocean.this"]
   provisioner "shell" {
     inline = [
-      "whoami"
+      "groupadd -g 1001 ubuntu",
+      "useradd ubuntu -m -g 1001 -u 1001",
+      "apt-get update"
     ]
+  }
+  provisioner "shell" {
+    script = "./scripts/bootsrap.sh"
   }
 }
